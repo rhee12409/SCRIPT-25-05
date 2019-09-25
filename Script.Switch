@@ -1,0 +1,65 @@
+enable 
+configure terminal
+hostname SW-01
+banner motd "ACESSO APENAS PARA MEMBROS DA CASA BOLTON"
+enable secret enablecasabolton
+username Danieljesus privilege 15 secret senha Madagascar
+username Filipemondoni privilege 15 secret senha Madagascar
+username IanSimim privilege 15 secret senha Madagascar
+username Melissareis privilege 15 secret senha Madagascar
+username Renanaraujo privilege 15 secret senha Madagascar
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+password casabolton
+login local
+exec-timeout 9
+line vty 0 15
+password casaboltonVTY
+transport input ssh
+login local
+exec-timeout 10
+exit
+service password-encryption
+vlan 10
+name VLAN10
+vlan 20
+name VLAN20
+vlan 30
+name VLAN30
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 10
+description REDE VLAN10
+exit
+interface fastEthernet 0/2
+switchport mode access
+switchport access vlan 10
+description REDE VLAN10
+exit
+interface fastEthernet 0/3
+switchport mode access
+switchport access vlan 20
+description REDE VLAN20
+exit
+interface fastEthernet 0/4
+switchport mode access
+switchport access vlan 20
+description REDE VLAN20
+exit
+interface fastEthernet 0/24
+switchport mode access
+switchport access vlan 30
+description REDE VLAN30
+exit
+interface vlan 30
+ip address 192.168.8.174 255.255.255.240
+interface gigabitethernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,30,99
+description TRUNK
+no shut
+exit
+ip default-gateway 192.168.8.129
+do wr
