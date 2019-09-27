@@ -1,1 +1,32 @@
-
+enable
+configure terminal
+hostname RT-01
+interface gigabitEthernet 0/1
+no shutdown
+interface gigabitEthernet 0/1.10
+encapsulation dot1q 10
+ip address 192.168.5.1 255.255.255.224
+description GATEWAY-VLAN 10
+interface gigabitEthernet 0/1.20
+encapsulation dot1q 20
+ip address 192.168.4.1 255.255.255.128
+description GATEWAY-VLAN 20
+interface gigabitEthernet 0/1.30
+encapsulation dot1q 30
+ip address 192.168.5.33 255.255.255.240
+description GATEWAY-VLAN 30
+interface gigabitEthernet 0/0
+no shutdown
+interface gigabitEthernet 0/0.10
+encapsulation dot1q 10
+ip address 192.168.8.129 255.255.255.224
+description GATEWAY-VLAN 10
+interface gigabitEthernet 0/0.20
+encapsulation dot1q 20
+ip address 192.168.8.1 255.255.255.128
+description GATEWAY-VLAN 20
+interface gigabitEthernet 0/0.30
+encapsulation dot1q 30
+ip address 192.168.8.61 255.255.255.240
+description GATEWAY-VLAN 30
+do wr
